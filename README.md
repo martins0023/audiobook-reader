@@ -21,51 +21,63 @@ The project is designed with a clear separation of concerns, ensuring a clean an
 
 # Technologies Used
 Frontend (Client)
-React Native: The core framework for building the mobile application.
+   * React Native: The core framework for building the mobile application.
 
-Expo: The platform for building, deploying, and running the React Native app.
+  * Expo: The platform for building, deploying, and running the React Native app.
 
-Expo Router: Used for file-system-based navigation.
+  * Expo Router: Used for file-system-based navigation.
 
-Tailwind CSS: For fast and responsive styling.
+  * Tailwind CSS: For fast and responsive styling.
 
-expo-document-picker: For selecting files from the device.
+  * expo-document-picker: For selecting files from the device.
 
-expo-file-system: For reading and handling local files.
+  * expo-file-system: For reading and handling local files.
 
-expo-speech: For the core Text-to-Speech functionality.
+  * expo-speech: For the core Text-to-Speech functionality.
 
-Backend (Cloud)
-Google Cloud Functions: The serverless compute service that runs the processing logic.
+  * Backend (Cloud)
+  * Google Cloud Functions: The serverless compute service that runs the processing logic.
 
-Google Cloud Storage: Used for storing raw text files and processed audio files.
+  * Google Cloud Storage: Used for storing raw text files and processed audio files.
 
-Google Cloud Text-to-Speech API: Generates high-quality, natural-sounding audio from text.
+  * Google Cloud Text-to-Speech API: Generates high-quality, natural-sounding audio from text.
 
-Node.js: The runtime environment for the Cloud Functions.
+  * Node.js: The runtime environment for the Cloud Functions.
 
-sentiment: A lightweight npm package for basic text sentiment analysis.
+  * sentiment: A lightweight npm package for basic text sentiment analysis.
 
 # Project Structure
 my-audiobook-reader/
+
 ├── app/
+
 │   ├── (tabs)/
+
 │   │   └── reader/
+
 │   │       └── index.tsx      # The main reader screen component
+
 │   └── _layout.tsx
+
 ├── backend/
+
 │   ├── package.json
+
 │   └── index.js             # The backend Cloud Functions
+
 ├── app.json
+
 ├── package.json
+
 └── README.md
 
+
 # Getting Started
-Prerequisites
+* Prerequisites
 Node.js (LTS version)
-
+```
 npm
-
+```
 Expo CLI (npm install -g expo-cli)
 
 Google Cloud SDK (gcloud) configured with a project.
@@ -93,42 +105,42 @@ Navigate to the backend/ directory:
 cd backend
 ```
 Install backend dependencies:
-
+```
 npm install
-
+```
 Create a Google Cloud Storage bucket for your files:
-
+```
 gsutil mb -p [YOUR_PROJECT_ID] gs://my-audiobook-reader-files
-
-Deploy the Cloud Functions:
+```
+# Deploy the Cloud Functions:
 
 File Upload Function:
-
+```
 gcloud functions deploy uploadBook --runtime=nodejs20 --trigger-http --allow-unauthenticated
-
+```
 Processing Function:
-
+```
 gcloud functions deploy processBook --runtime=nodejs20 --trigger-bucket=my-audiobook-reader-files
+```
+# Usage
+  * Open the app in Expo Go.
 
-Usage
-Open the app in Expo Go.
+  * Tap the upload icon (cloud with an arrow) to select a .txt file from your device.
 
-Tap the upload icon (cloud with an arrow) to select a .txt file from your device.
+  * The text will appear on the screen.
 
-The text will appear on the screen.
+  * Tap the play button to start listening to the text as a synthesized audiobook.
 
-Tap the play button to start listening to the text as a synthesized audiobook.
+# Future Plans
+  * PDF Text Extraction: Implement a solution for extracting text from PDFs to be used with the TTS function. This will likely involve a separate backend service that uses a robust library.
 
-Future Plans
-PDF Text Extraction: Implement a solution for extracting text from PDFs to be used with the TTS function. This will likely involve a separate backend service that uses a robust library.
+  * User Authentication: Add user login to store user-specific books and audio files securely.
 
-User Authentication: Add user login to store user-specific books and audio files securely.
+  * Progress Tracking: Save the user's reading progress and bookmarks.
 
-Progress Tracking: Save the user's reading progress and bookmarks.
+  * Advanced NLP: Integrate with a more sophisticated NLP model to capture more nuanced emotional tones and speaking styles.
 
-Advanced NLP: Integrate with a more sophisticated NLP model to capture more nuanced emotional tones and speaking styles.
+  * UI/UX Improvements: Refine the user interface with more professional controls and animations.
 
-UI/UX Improvements: Refine the user interface with more professional controls and animations.
-
-License
+# License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
